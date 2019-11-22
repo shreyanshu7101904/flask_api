@@ -1,2 +1,8 @@
+#python executables
 *.pyc
+
+#virtual env
 env/
+
+#vs code
+.vscode/
