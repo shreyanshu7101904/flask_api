@@ -17,12 +17,12 @@ class TokenOperation:
         except DuplicateKeyError as e:
             return False, e
 
-    def getToken(self, val):
-        # try:
-        print(val)
+    # def getToken(self, val):
+    #     # try:
+    #     print(val)
 
-        data = dict(self.db.find_one({"value":val}))
-        print(data)
-        return True, data
-        # except TypeError:
-        #     return False, "object does not exists"
+    #     data = dict(self.db.find_one({"value":val}))
+    #     print(data)
+    #     return True, data
+    #     # except TypeError:
+    #     #     return False, "object does not exists"
