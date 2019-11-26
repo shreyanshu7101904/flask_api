@@ -2,14 +2,14 @@ import jwt as webtoken
 
 
 def jwtTokenCreater(key, value):
-    key = key + "saltvalue"
+    key = key + "37[9FMuj*\Aqk`sA"
     encoded_val = webtoken.encode(value, key, algorithm='HS256')
     return encoded_val.decode("utf-8")
 
 
 
 def jwtTokenVerify(key, value):
-    key = key + "saltvalue"
+    key = key + "37[9FMuj*\Aqk`sA"
     try:
         decoded_val = webtoken.decode(value, key, algorithm='HS256')
         return True, decoded_val

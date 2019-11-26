@@ -6,6 +6,7 @@ from marshmallow import ValidationError
 sys.path.append('../../')
 from lib.mongo.MongoDbOperations import MongoLoginModule
 from lib.models.UserModel import UserSchema
+from lib.mongo.config import api_key_val
 
 
 
@@ -15,7 +16,7 @@ signup = Blueprint('signup', __name__)
 def addUser():
     request_json = request.get_json()
     key = request.headers.get('secret_key')
-    if key and key == 'shreyanshu' :
+    if key and key == api_key_val :
         try:
             x = UserSchema().load(request_json)
             data_base_ob = MongoLoginModule()

@@ -7,6 +7,7 @@ from lib.mongo.MongoDbOperations import MongoLoginModule
 from lib.mongo.TokenOperation import TokenOperation
 from lib.models.LoginModel import LoginSchema
 from lib.tokens.AuthTokens import jwtTokenCreater
+from lib.mongo.config import api_key_val
 
 
 
@@ -16,7 +17,7 @@ login = Blueprint('login', __name__)
 def validateUser():
     request_json = request.get_json()
     key = request.headers.get('secret_key')
-    if key and key == 'shreyanshu' :
+    if key and key == api_key_val :
         try:
             x = LoginSchema().load(request_json)
             data_base_ob = MongoLoginModule()
