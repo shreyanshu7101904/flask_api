@@ -16,8 +16,9 @@ signup = Blueprint('signup', __name__)
 def addUser():
     request_json = request.get_json()
     key = request.headers.get('secret_key')
-    if key and key == api_key_val :
+    if key and key == "shreyanshu" :
         try:
+            print(key)
             x = UserSchema().load(request_json)
             data_base_ob = MongoLoginModule()
             status, _id = data_base_ob.addUser(request_json)
@@ -42,6 +43,6 @@ def addUser():
             "message" : "key validation error",
             "status": 404
         }
-        return response
+        return response, 404
 
 
