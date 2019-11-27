@@ -12,6 +12,9 @@ app.register_blueprint(signup)
 app.register_blueprint(login)
 app.register_blueprint(test)
 
+@app.route('/')
+def hello_world():
+    return 'test-api'
 
 if __name__ == '__main__':
     app.run(debug = True, host = '0.0.0.0')
