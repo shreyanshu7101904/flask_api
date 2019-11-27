@@ -8,7 +8,6 @@ class UserSchema(Schema):
     mobilenumber = fields.String(required=True, data_key='user_phone',
      validate=validate.Length(min=10, max=13))
     pasword = fields.String(required=True, data_key='auth_value')
-    userName = fields.String(required=True, data_key='user_id')
     email_verified = fields.Bool(required=True, data_keys='email_verified')
     phone_verified = fields.Bool(required=True, data_keys='phone_verified')
     bank_verified = fields.Bool(required=True, data_keys='bank_verified')
