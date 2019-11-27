@@ -13,6 +13,7 @@ def test_route():
     request_json = request.get_json()
     key = request.headers.get('Token')
     val = request.headers.get('secret_key')
+    print(dict(request.headers), key, "\n", val)
     if key and val :
         token_satus, val = jwtTokenVerify(val, key)
         if token_satus:

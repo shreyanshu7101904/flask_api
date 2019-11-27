@@ -15,9 +15,8 @@ signup = Blueprint('signup', __name__)
 @signup.route('/v1/user/signup', methods = ['POST'])
 def addUser():
     request_json = request.get_json()
-    key = request.headers.get('secret_key')
-    print(key,key=='shreyanshu')
-    if key and key == "shreyanshu" :
+    key = request.headers.get('secret-key')
+    if key and key == api_key_val :
         try:
             print(key)
             x = UserSchema().load(request_json)

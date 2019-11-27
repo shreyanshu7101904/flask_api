@@ -6,4 +6,4 @@ password = "def"
 login_db = "championzArena"
 login_collection = "users"
 
-api_key_val = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJjaGFtcGlvbnpfQXJlbmEifQ.fSRN2nWORgMMLhcTr7NvkXxgEHpbd5rHtlFnE-IK0t8"
+api_key_val = "T/D*uWvch7`Xe4pg"
