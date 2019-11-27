@@ -16,6 +16,7 @@ signup = Blueprint('signup', __name__)
 def addUser():
     request_json = request.get_json()
     key = request.headers.get('secret_key')
+    print(key,key=='shreyanshu')
     if key and key == "shreyanshu" :
         try:
             print(key)
