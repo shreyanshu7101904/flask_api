@@ -1,12 +1,18 @@
 import sys
 from flask import Flask, request, jsonify, Blueprint, abort
 from marshmallow import ValidationError
+import uuid
 # from flask_api import status
 
 sys.path.append('../../')
 from lib.mongo.MongoDbOperations import MongoLoginModule
 from lib.models.UserModel import UserSchema
 from lib.mongo.config import api_key_val
+
+
+def generatUserId():
+    user_id = str(uuid.uuid4()).split('-')[2]
+    return user_id
 
 
 
@@ -18,14 +24,14 @@ def addUser():
     key = request.headers.get('secret-key')
     if key and key == api_key_val :
         try:
-            print(key)
             x = UserSchema().load(request_json)
             data_base_ob = MongoLoginModule()
+            request_json["user_id"] = request_json["user_name"][0:5] + generatUserId()
             status, _id = data_base_ob.addUser(request_json)
             if status:
                 response = {
                     "message":" user created",
-                    "id": str(_id)
+                    "id": request_json["user_id"]
                 }
                 return response, 200
             else:
