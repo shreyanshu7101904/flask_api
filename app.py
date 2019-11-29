@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 app.register_blueprint(signup)
 app.register_blueprint(login)
-app.register_blueprint(team)
+app.register_blueprint(teams)
 app.register_blueprint(team_by_id)
 
 app.register_blueprint(test)
