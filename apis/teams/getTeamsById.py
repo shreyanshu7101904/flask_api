@@ -7,11 +7,11 @@ from lib.mongo.TeamsOperation import Teams
 
 
 
-team = Blueprint('getTeams', __name__)
+team_by_id = Blueprint('getTeams', __name__)
 
 
-@team.route('/v1/team/getTeams', methods = ['POST'])
-def test_route():
+@team_by_id.route('/v1/team/getTeamsById', methods = ['POST'])
+def getteambyid():
     request_json = request.get_json()
     key = request.headers.get('Token')
     val = request.headers.get('secret_key')

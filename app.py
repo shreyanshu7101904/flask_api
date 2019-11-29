@@ -3,7 +3,9 @@ from flask_cors import CORS
 import sys
 from apis.signup.signup import signup
 from apis.login.login import login
-from apis.teams.getAllTeams import team
+from apis.teams.getAllTeams import teams
+from apis.teams.getTeamsById import team_by_id
+
 from apis.testapi.test_api import test
 
 
@@ -12,6 +14,8 @@ CORS(app)
 app.register_blueprint(signup)
 app.register_blueprint(login)
 app.register_blueprint(team)
+app.register_blueprint(team_by_id)
+
 app.register_blueprint(test)
 
 
