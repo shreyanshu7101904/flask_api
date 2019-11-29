@@ -7,7 +7,7 @@ from lib.mongo.TeamsOperation import Teams
 
 
 
-team_by_id = Blueprint('getTeams', __name__)
+team_by_id = Blueprint('getTeamsById', __name__)
 
 
 @team_by_id.route('/v1/team/getTeamsById', methods = ['POST'])
