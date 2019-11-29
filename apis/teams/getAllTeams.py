@@ -19,7 +19,11 @@ def test_route():
         token_satus, val = jwtTokenVerify(val, key)
         if token_satus:
             team_ob = Teams()
-            response = team_ob.getAllTeams()
+            teams_list = team_ob.getAllTeams()
+            response = {
+                "teams": teams_list
+            }
+
             return response,200
         else:
             response = {
