@@ -7,3 +7,4 @@ login_db = "championzArena"
 login_collection = "users"
 
 api_key_val = "T/D*uWvch7`Xe4pg"
+teams_collection = 'Raw_Teams'
