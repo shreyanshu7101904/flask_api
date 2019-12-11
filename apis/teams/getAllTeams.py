@@ -1,21 +1,19 @@
 import sys
-from flask import Flask, request, Blueprint
+from flask import request, Blueprint
 
 sys.path.append('../../')
 from lib.tokens.AuthTokens import jwtTokenVerify
 from lib.mongo.TeamsOperation import Teams
 
 
-
 teams = Blueprint('getTeams', __name__)
 
 
-@teams.route('/v1/team/getTeams', methods = ['POST'])
+@teams.route('/v1/team/getTeams', methods=['POST'])
 def getallteams():
-    request_json = request.get_json()
     key = request.headers.get('Token')
     val = request.headers.get('secret_key')
-    if key and val :
+    if key and val:
         token_satus, val = jwtTokenVerify(val, key)
         if token_satus:
             team_ob = Teams()
@@ -24,17 +22,15 @@ def getallteams():
                 "teams": teams_list
             }
 
-            return response,200
+            return response, 200
         else:
             response = {
-                "message":"Failed token Validation"
+                "message": "Failed token Validation"
             }
-            return response,402 
+            return response, 402
 
     else:
         response ={
-            "message" : "key validation error"
+            "message": "key validation error"
         }
         return response, 404
-
-

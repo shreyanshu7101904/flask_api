@@ -1,8 +1,7 @@
 import sys
-from flask import Flask, request, jsonify, Blueprint, abort
+from flask import request, Blueprint, abort
 from marshmallow import ValidationError
 import uuid
-# from flask_api import status
 
 sys.path.append('../../')
 from lib.mongo.MongoDbOperations import MongoLoginModule
@@ -15,18 +14,19 @@ def generatUserId():
     return user_id
 
 
-
 signup = Blueprint('signup', __name__)
 
-@signup.route('/v1/user/signup', methods = ['POST'])
+
+@signup.route('/v1/user/signup', methods=['POST'])
 def addUser():
     request_json = request.get_json()
     key = request.headers.get('secret-key')
-    if key and key == api_key_val :
+    if key and key == api_key_val:
         try:
             x = UserSchema().load(request_json)
             data_base_ob = MongoLoginModule()
-            request_json["user_id"] = request_json["user_name"][0:5] + generatUserId()
+            request_json["user_id"] = request_json["user_name"][0:5] + \
+                generatUserId()
             status, _id = data_base_ob.addUser(request_json)
             if status:
                 response = {
@@ -45,10 +45,8 @@ def addUser():
             }
             return response, 302
     else:
-        response ={
-            "message" : "key validation error",
+        response = {
+            "message": "key validation error",
             "status": 404
         }
         return response, 404
-
-
