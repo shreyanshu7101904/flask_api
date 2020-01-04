@@ -11,13 +11,15 @@ email_change = Blueprint('email_change', __name__)
 
 @email_change.route('/api/v1/user/change/email', methods=['POST'])
 def ChangeUserEmail():
+    req_ob = request.get_json()
     val = request.headers.get('Token')
     key = request.headers.get('secret_key')
     if key and val:
         token_satus, val = jwtTokenVerify(key, val)
         if token_satus:
             data_base_ob = PostgresOperation()
-            status, user_detail = data_base_ob.changeEmail(key)
+            status, user_detail = data_base_ob.changeEmail(
+                key, req_ob["user_email"])
             if status:
                 response = {
                     "message": "details updated"

@@ -95,21 +95,21 @@ class PostgresOperation:
         for i in record:
             print(i)
 
-    def changeEmail(self, user_id):
+    def changeEmail(self, user_id, val):
         try:
             query = """update user_details set user_email = %s where \
                 user_id = %s"""
-            self.cursor.execute(query, (True, user_id))
+            self.cursor.execute(query, (val, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:
             return False, e
 
-    def changeMobile(self, user_id):
+    def changeMobile(self, user_id, val):
         try:
-            query = """update user_details set user_email = %s where \
+            query = """update user_details set user_phone = %s where \
                 user_id = %s"""
-            self.cursor.execute(query, (True, user_id))
+            self.cursor.execute(query, (val, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:
@@ -126,54 +126,3 @@ if __name__ == "__main__":
     # print(ob.loginModule(data))
     print(ob.updateMobileStatus(data))
     print(ob.updateEmailStatus(data))
-    # data_val = {
-    #     "user_name": "shrey731e12",
-    #     "auth_value": "abecd",
-    #     "user_email": "avdvadefe@gmail.com",
-    #     "user_phone": "64571269766",
-    #     "phone_verified": False,
-    #     "email_verified": False,
-    #     "bank_verified": False,
-    #     "latitude": None,
-    #     "longitude": None,
-    #     "user_device_id": "shreyanshu__one"
-    # }
-    # print(ob.signupModule(data_val))
-# try:
-    # connection = psql.connect(user="postgres",
-    #                           password="1234",
-    #                           host="127.0.0.1",
-    #                           port="5432",
-    #                           database="shreyanshu")
-
-#     cursor = connection.cursor(cursor_factory=RealDictCursor)
-#     user_id = "shreya42a1"
-    # get_data_from_sql = """select auth_value from user_details WHERE user_id= '{}' """.format(
-    #     user_id)
-
-#     # Print PostgreSQL version
-    # cursor.execute(get_data_from_sql)
-    # record = cursor.fetchone()
-#     print(record['auth_value'])
-
-# except (Exception, psql.Error) as error:
-#     print("Error while connecting to PostgreSQL", error)
-# finally:
-#     # closing database connection.
-#     if(connection):
-#         cursor.close()
-#         connection.close()
-#         print("PostgreSQL connection is closed")
-# .format(
-#                 user_data["user_name"],
-#                 user_data["auth_value"],
-#                 user_data["user_email"],
-#                 user_data["user_phone"],
-#                 user_data["phone_verified"],
-#                 user_data["email_verified"],
-#                 user_data["bank_verified"],
-#                 user_data["latitude"],
-#                 user_data["longitude"],
-#                 user_data["user_device_id"],
-#                 datetime.now()
-#             )
