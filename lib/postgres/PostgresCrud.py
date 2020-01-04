@@ -61,7 +61,6 @@ class PostgresOperation:
             return True, "Done"
         except Exception as e:
             return False, e
-        pass
 
     def updateEmailStatus(self, user_id):
         try:
@@ -89,6 +88,26 @@ class PostgresOperation:
         record = self.cursor.fetchall()
         for i in record:
             print(i)
+
+    def changeEmail(self, user_id):
+        try:
+            query = """update user_details set user_email = %s where \
+                user_id = %s"""
+            self.cursor.execute(query, (True, user_id))
+            self.connection.commit()
+            return True, "Done"
+        except Exception as e:
+            return False, e
+
+    def changeMobile(self, user_id):
+        try:
+            query = """update user_details set user_email = %s where \
+                user_id = %s"""
+            self.cursor.execute(query, (True, user_id))
+            self.connection.commit()
+            return True, "Done"
+        except Exception as e:
+            return False, e
 
 
 if __name__ == "__main__":
