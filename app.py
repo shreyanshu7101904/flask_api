@@ -7,7 +7,6 @@ from apis.teams.getTeamsById import team_by_id
 from apis.email.updateEmail import email_update
 from apis.mobile.updateMobile import mobile_update
 
-from apis.testapi.test_api import test
 
 
 app = Flask(__name__)
@@ -20,9 +19,7 @@ app.register_blueprint(email_update)
 app.register_blueprint(mobile_update)
 
 
-app.register_blueprint(test)
-
 
 if __name__ == '__main__':
-    app.run(debug=True,)
+    app.run(debug=False)
     # app.run(debug = True, port= 4000)

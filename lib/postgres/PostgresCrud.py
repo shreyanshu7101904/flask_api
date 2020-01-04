@@ -3,12 +3,6 @@ from psycopg2.extras import RealDictCursor
 from datetime import datetime
 from .postgresConfig import *
 
-# user_name = "postgres"
-# db_password = "1234"
-# db_host = "127.0.0.1"
-# db_port = "5432"
-# db_database = "shreyanshu"
-
 
 class PostgresOperation:
     def __init__(self):

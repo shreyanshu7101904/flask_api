@@ -26,7 +26,6 @@ def addUser():
             data_base_ob = PostgresOperation()
             request_json["user_id"] = request_json["user_name"][0:5] + \
                 generatUserId()
-            print(request_json["user_id"])
             status, _id = data_base_ob.signupModule(request_json)
 
             if status:
