@@ -11,13 +11,15 @@ mobile_change = Blueprint('mobile_change', __name__)
 
 @mobile_change.route('/api/v1/user/change/mobile', methods=['POST'])
 def ChangeUserMobile():
+    req_ob = request.get_json()
     val = request.headers.get('Token')
     key = request.headers.get('secret_key')
     if key and val:
         token_satus, val = jwtTokenVerify(key, val)
         if token_satus:
             data_base_ob = PostgresOperation()
-            status, user_detail = data_base_ob.changeMobile(key)
+            status, user_detail = data_base_ob.changeMobile(
+                key, req_ob["user_phone"])
             if status:
                 response = {
                     "message": "details updated"
