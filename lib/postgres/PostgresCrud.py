@@ -1,13 +1,13 @@
 import psycopg2 as psql
 from psycopg2.extras import RealDictCursor
 from datetime import datetime
-# from .postgresConfig import *
+from .postgresConfig import *
 
-user_name = "postgres"
-db_password = "1234"
-db_host = "127.0.0.1"
-db_port = "5432"
-db_database = "shreyanshu"
+# user_name = "postgres"
+# db_password = "1234"
+# db_host = "127.0.0.1"
+# db_port = "5432"
+# db_database = "shreyanshu"
 
 
 class PostgresOperation:
@@ -20,13 +20,13 @@ class PostgresOperation:
         self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
 
     def loginModule(self, data):
-        users_data = """select auth_value from user_details WHERE user_id= '{}'""".format(
+        users_data = """select * from user_details WHERE user_id= '{}'""".format(
             data['user_id'])
         self.cursor.execute(users_data)
         users_db_data = self.cursor.fetchone()
         if users_db_data:
             if users_db_data['auth_value'] == data['auth_value']:
-                return True, data
+                return 1, data, users_db_data
             else:
                 return False, "password error"
         else:
@@ -34,12 +34,13 @@ class PostgresOperation:
 
     def signupModule(self, user_data):
         try:
-            create_query = """ insert into user_details (user_name, auth_value, user_email,\
+            create_query = """ insert into user_details (user_name,user_id, auth_value, user_email,\
                 user_phone, phone_verified, email_verified, bank_verified,
                 latitude, longitude, user_device_id, created_at) values \
-                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
             self.cursor.execute(create_query, (
                 user_data["user_name"],
+                user_data["user_id"],
                 user_data["auth_value"],
                 user_data["user_email"],
                 user_data["user_phone"],
@@ -54,36 +55,35 @@ class PostgresOperation:
             self.connection.commit()
             return True, "user Created"
         except Exception as e:
+            print(e)
             return False, e
 
-    def updateMobileStatus(self, data):
-        print(data["user_id"])
+    def updateMobileStatus(self, user_id):
         try:
             query = """update user_details set phone_verified = %s where \
                 user_id = %s"""
-            self.cursor.execute(query, (True, data["user_id"]))
+            self.cursor.execute(query, (True, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:
             return False, e
         pass
 
-    def updateEmailStatus(self, data):
-        print(data["user_id"])
+    def updateEmailStatus(self, user_id):
         try:
             query = """update user_details set email_verified = %s where \
                 user_id = %s"""
-            self.cursor.execute(query, (True, data["user_id"]))
+            self.cursor.execute(query, (True, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:
             return False, e
 
-    def updateBankStatus(self, data):
+    def updateBankStatus(self, user_id):
         try:
             query = """update user_details set bank_verified = %s where \
                 user_id = %s"""
-            self.cursor.execute(query, (True, data["user_id"]))
+            self.cursor.execute(query, (True, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:
