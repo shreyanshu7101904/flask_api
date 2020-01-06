@@ -14,7 +14,7 @@ class PostgresOperation:
         self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
 
     def loginModule(self, data):
-        users_data = """select * from user_details WHERE user_id= '{}'""".format(
+        users_data = """select * from user_details WHERE user_email= '{}'""".format(
             data['user_id'])
         self.cursor.execute(users_data)
         users_db_data = self.cursor.fetchone()
@@ -22,9 +22,9 @@ class PostgresOperation:
             if users_db_data['auth_value'] == data['auth_value']:
                 return 1, data, users_db_data
             else:
-                return False, "password error"
+                return False, "password error", "error in password"
         else:
-            return 2, "user not registered"
+            return 2, "user not registered", "user_not registered"
 
     def signupModule(self, user_data):
         try:
