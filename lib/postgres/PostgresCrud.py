@@ -14,8 +14,8 @@ class PostgresOperation:
         self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
 
     def loginModule(self, data):
-        users_data = """select * from user_details WHERE user_email= '{}'""".format(
-            data['user_id'])
+        users_data = """select * from user_details WHERE user_email= '{}' or user_phone= '{}'""".format(
+            data['user_id'], data['user_id'])
         self.cursor.execute(users_data)
         users_db_data = self.cursor.fetchone()
         if users_db_data:
