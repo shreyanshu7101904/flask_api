@@ -14,7 +14,7 @@ class PostgresOperation:
         self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
 
     def loginModule(self, data):
-        users_data = """select * from user_details WHERE user_email= '{}' or user_phone= '{}'""".format(
+        users_data = """select * from user_details WHERE user_email= '{}' OR user_phone= '{}'""".format(
             data['user_id'], data['user_id'])
         self.cursor.execute(users_data)
         users_db_data = self.cursor.fetchone()
@@ -104,6 +104,16 @@ class PostgresOperation:
             query = """update user_details set user_phone = %s where \
                 user_id = %s"""
             self.cursor.execute(query, (val, user_id))
+            self.connection.commit()
+            return True, "Done"
+        except Exception as e:
+            return False, e
+
+    def changePassword(self, user_id, val):
+        try:
+            query = """update user_details set user_id = %s where \
+                user_id = %s  OR user_phone= %s"""
+            self.cursor.execute(query, (val, user_id, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:

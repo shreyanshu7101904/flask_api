@@ -8,6 +8,7 @@ from apis.email.updateEmail import email_update
 from apis.email.changeEmail import email_change
 from apis.mobile.updateMobile import mobile_update
 from apis.mobile.changeMobile import mobile_change
+from apis.changepassword.changepassword import change_password
 
 
 app = Flask(__name__)
@@ -20,6 +21,7 @@ app.register_blueprint(email_update)
 app.register_blueprint(email_change)
 app.register_blueprint(mobile_update)
 app.register_blueprint(mobile_change)
+app.register_blueprint(change_password)
 
 
 if __name__ == '__main__':
