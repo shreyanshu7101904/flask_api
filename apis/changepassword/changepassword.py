@@ -15,7 +15,7 @@ def UpdatePassword():
     key = request.headers.get('secret_key')
     response_ = request.get_json()
     if key and val:
-        token_satus, val = jwtTokenVerify(val, key)  # token, secret_key
+        token_satus, val = jwtTokenVerify(key, val)  # secret_key, token
         if token_satus:
             data_base_ob = PostgresOperation()
             status, user_detail = data_base_ob.changePassword(
