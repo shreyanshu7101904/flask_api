@@ -19,17 +19,10 @@ def validateUser():
     key = request.headers.get('secret_key')
     if key and key == api_key_val:
         try:
-            #x = LoginSchema().load(request_json)
             data_base_ob = PostgresOperation()
             status, user_detail, data = data_base_ob.loginModule(request_json)
             if status == 1:
-                token = jwtTokenCreater(user_detail["user_id"], request_json)
-                # data = {
-                #     "key": request_json["user_id"],
-                #     "value": token
-                # }
-                # token_ob = TokenOperation()
-                # token_ob.addToken(data)
+                token = jwtTokenCreater(data["user_id"], request_json)
                 response = {
                     "message": " user validated",
                     "token": token,
