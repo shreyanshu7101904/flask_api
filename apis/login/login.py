@@ -23,7 +23,7 @@ def validateUser():
             data_base_ob = PostgresOperation()
             status, user_detail, data = data_base_ob.loginModule(request_json)
             if status == 1:
-                token = jwtTokenCreater(request_json["user_id"], request_json)
+                token = jwtTokenCreater(user_detail["user_id"], request_json)
                 # data = {
                 #     "key": request_json["user_id"],
                 #     "value": token
