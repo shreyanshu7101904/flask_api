@@ -19,6 +19,7 @@ class PostgresOperation:
         self.cursor.execute(users_data)
         users_db_data = self.cursor.fetchone()
         if users_db_data:
+
             if users_db_data['auth_value'] == data['auth_value']:
                 return 1, data, users_db_data
             else:
@@ -111,9 +112,9 @@ class PostgresOperation:
 
     def changePassword(self, user_id, val):
         try:
-            query = """update user_details set user_id = %s where \
-                user_id = %s  OR user_phone= %s"""
-            self.cursor.execute(query, (val, user_id, user_id))
+            query = """update user_details set auth_value = %s where \
+                user_id = %s"""
+            self.cursor.execute(query, (val, user_id))
             self.connection.commit()
             return True, "Done"
         except Exception as e:
