@@ -14,7 +14,7 @@ def UpdateUserEmail():
     val = request.headers.get('Token')
     key = request.headers.get('secret_key')
     if key and val:
-        token_satus, val = jwtTokenVerify(key, val)
+        token_satus, val = jwtTokenVerify(val, key)  # token, secret_key
         if token_satus:
             data_base_ob = PostgresOperation()
             status, user_detail = data_base_ob.updateEmailStatus(key)
