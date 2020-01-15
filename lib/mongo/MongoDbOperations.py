@@ -15,6 +15,9 @@ class MongoOperations:
         coll_match = self.db[matches_colection]
         try:
             data = coll_match.find({}, {'_id':0})
+            final_data = []
+            for i in data:
+                final_data.append(i)
             return True, data
         except  Exception as e:
             return False, e
