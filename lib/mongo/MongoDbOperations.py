@@ -18,7 +18,7 @@ class MongoOperations:
             final_data = []
             for i in data:
                 final_data.append(i)
-            return True, data
+            return True, final_data
         except  Exception as e:
             return False, e
 
