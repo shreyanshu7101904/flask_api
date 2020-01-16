@@ -10,7 +10,8 @@ from apis.mobile.updateMobile import mobile_update
 from apis.mobile.changeMobile import mobile_change
 from apis.changepassword.changepassword import change_password
 from apis.matches.getmatches import  get_match_data
-
+from apis.users.addUserDetails import add_user_details
+from apis.users.getUserDetails import get_user_details
 
 app = Flask(__name__)
 CORS(app)
@@ -24,6 +25,8 @@ app.register_blueprint(mobile_update)
 app.register_blueprint(mobile_change)
 app.register_blueprint(change_password)
 app.register_blueprint(get_match_data)
+app.register_blueprint(get_user_details)
+app.register_blueprint(add_user_details)
 
 
 if __name__ == '__main__':

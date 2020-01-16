@@ -22,9 +22,21 @@ class MongoOperations:
         except  Exception as e:
             return False, e
 
+    def getUserDetails(self, user_id):
+        user_coll = self.db['users']
+        try:
+            data = user_coll.find_one({'user_id': user_id})
+            return 1, dict(data)
+        except Exception as e:
+            return 0, e
 
-
-
+    def addUserDetails(self, user_id, data):
+        user_coll = self.db['users']
+        try:
+            data = user_coll.update(data, upsert=True)
+            return 1, dict(data)
+        except Exception as e:
+            return 0, e
 
 # if __name__ == '__main__':
 #     ob = MongoLoginModule()
