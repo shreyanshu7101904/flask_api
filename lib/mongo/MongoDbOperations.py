@@ -26,7 +26,7 @@ class MongoOperations:
         user_coll = self.db['users']
         try:
             data = user_coll.find_one({'user_id': user_id})
-            return 1, dict(data)
+            return 1, data
         except Exception as e:
             return 0, e
 
