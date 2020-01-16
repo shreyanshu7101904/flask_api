@@ -34,7 +34,7 @@ class MongoOperations:
         user_coll = self.db['users']
         try:
             data = user_coll.update({"user_id": data['user_id']},data, upsert=True)
-            return 1, dict(data)
+            return 1, 'user updated'
         except Exception as e:
             return 0, e
 
