@@ -33,7 +33,7 @@ class MongoOperations:
     def addUserDetails(self, data):
         user_coll = self.db['users']
         try:
-            data = user_coll.update(data, upsert=True)
+            data = user_coll.update({"user_id": data['user_id']},data, upsert=True)
             return 1, dict(data)
         except Exception as e:
             return 0, e
