@@ -2,6 +2,7 @@ from lib.tokens.AuthTokens import jwtTokenVerify
 from lib.mongo.MongoDbOperations import MongoOperations
 import sys
 from flask import request, Blueprint
+from flask import jsonify
 
 sys.path.append('../../')
 
@@ -18,10 +19,9 @@ def getUserDetails():
         if token_satus:
             data_base_ob = MongoOperations()
             status, user_detail = data_base_ob.getUserDetails(key)
-            print(user_detail, type(user_detail))
             if status:
                 response = {
-                    "data": user_detail
+                    "data": jsonify(user_detail)
                 }
                 return response, 200
             else:
