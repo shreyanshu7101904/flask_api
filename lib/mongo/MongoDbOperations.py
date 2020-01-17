@@ -1,5 +1,7 @@
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
+from bson import  json_util, objectid
+import  json
 from .config import *
 
 
@@ -26,6 +28,7 @@ class MongoOperations:
         user_coll = self.db['users']
         try:
             data = user_coll.find_one({'user_id': user_id})
+            data = json.loads(json_util.dumps(data)
             return 1, data
         except Exception as e:
             return 0, e
